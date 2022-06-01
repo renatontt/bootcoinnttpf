@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bootcoinnttpf
+  labels:
+    app: bootcoinnttpf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: bootcoinnttpf
+  template:
+    metadata:
+      labels:
+        app: bootcoinnttpf
+        service: bootcoinnttpf
+    spec:
+      containers:
+        - name: bootcoinnttpf
+          image: bootcoinnttpf.azurecr.io/bootcoinnttpf:v1
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8084
+              protocol: TCP
+          env:
+            - name: ASPNETCORE_URLS
+              value: http://+:8083
+            - name: WebApiBaseAddress
+              value: http://webapi

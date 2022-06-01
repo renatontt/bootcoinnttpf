@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bootcoinnttpf
+  labels:
+    app: bootcoinnttpf
+    service: bootcoinnttpf
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 8084
+      targetPort: 8084
+      protocol: TCP
+  selector:
+    service: bootcoinnttpf
